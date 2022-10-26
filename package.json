@@ -1,0 +1,11 @@
+{
+  "name": "ai-headlines",
+  "version": "1.0.0",
+  "author": "Brandon Crossley",
+  "license": "MIT",
+  "description": "AI Generated Headlines in Google Sheets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
