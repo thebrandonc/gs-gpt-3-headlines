@@ -1,2 +1,3 @@
-# local dev
+# sensitive files
 .clasp.json
+settings.js
