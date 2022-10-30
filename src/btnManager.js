@@ -1,6 +1,10 @@
 class BtnManager {
-  loadingState(sheet) {
-    const btns = sheet.getDrawings();
+  constructor(sheet) {
+    this.sheet = sheet;
+  };
+
+  loadingState() {
+    const btns = this.sheet.getDrawings();
     btns.forEach(btn => {
       if (btn.getOnAction() === 'main') {
         btn.setWidth(1);
@@ -8,8 +12,8 @@ class BtnManager {
     });
   };
 
-  normalState(sheet) {
-    const btns = sheet.getDrawings();
+  normalState() {
+    const btns = this.sheet.getDrawings();
     btns.forEach(btn => {
       if (btn.getOnAction() === 'main') {
         btn.setWidth(152);

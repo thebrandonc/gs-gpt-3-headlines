@@ -43,12 +43,6 @@ class SheetManager {
     };
   };
 
-  incrementTokensUsed({ usage }) {
-    const tokens = this.doc.getRange(TOKENS_USED);
-    const newValue = tokens.getValue() + usage.total_tokens;
-    tokens.setValue(newValue);
-  };
-
   insertNewResults({ id, choices }) {
     const tab = this.sheetTabs.results;
     const firstRow = tab.getRange(TABLES.RESULTS).getLastRow()+1;
@@ -63,14 +57,22 @@ class SheetManager {
     const tab = this.sheetTabs.history
     const row = tab.getDataRange().getHeight()+1;
     const newRow = [new Date()];
-    newRow.push(textPrompt.getValue());
-    newRow.push(numResults.getValue());
-    newRow.push(wordCount.getValue());
-    newRow.push(creativityLevel.getValue());
-    newRow.push(usage.prompt_tokens);
-    newRow.push(usage.completion_tokens);
-    newRow.push(usage.total_tokens);
+    newRow.push(
+      textPrompt.getValue(),
+      numResults.getValue(),
+      wordCount.getValue(),
+      creativityLevel.getValue(),
+      usage.prompt_tokens,
+      usage.completion_tokens,
+      usage.total_tokens
+    );
     
     tab.getRange(row, 1, 1, 8).setValues([newRow]);
+  };
+
+  incrementTokensUsed({ usage }) {
+    const tokens = this.doc.getRange(TOKENS_USED);
+    const newValue = tokens.getValue() + usage.total_tokens;
+    tokens.setValue(newValue);
   };
 };
