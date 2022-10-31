@@ -1,38 +1,30 @@
 class App {
   constructor() {
     this.sheet = new SheetManager();
-    this.validator = new InputValidator();
+    this.val = new InputValidator();
     this.req = new RequestManager();
     this.btn = new BtnManager(this.sheet.sheetTabs.results);
   };
 
   run() {
     try {
-      // loading state button
-      // get sheet inputs
-      // validate inputs
-      // send request
-      // insert results into sheet
-      // insert res into history
-      // increment tokens used
-      // clear inputs
-      // normal state button
       this.btn.loadingState();
-      this.validator.validate(this.sheet.userInput);
-      console.log(this.validator.tokens);
+      this.val.validate(this.sheet.userInput);
+      this.req.getSuggestions(this.sheet.userInput);
+      this.sheet.clearOldResults();
+      this.sheet.insertNewResults(this.req.results);
+      this.sheet.addResponseToHistory(this.req.results);
+      this.sheet.incrementTokensUsed(this.req.results);
+      // this.sheet.clearUserInput();
       this.btn.normalState();
-    } catch(err) {
+      new Notification().send('success', 'Your AI generated results are ready');
+    } catch (err) {
       this.btn.normalState();
-      console.error(err);
-    }
+      new Notification().send('error', err);
+    };
   };
 };
 
 function main() {
   new App().run();
 };
-
-const notes = {
-  3: 'validate user inputs',
-  4: 'error handling'
-}

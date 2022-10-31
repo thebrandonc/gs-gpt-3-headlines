@@ -1,8 +1,8 @@
 class Notification {
   send(type, msg) {
-    const title = type === 'success' 
-    ? '🏆 Success!' 
-    : '😞 Something went wrong...';
+    const title = type === 'success'
+      ? '🏆 Success!'
+      : '😞 Something went wrong...';
 
     if (!DEBUG) {
       this.ui = SpreadsheetApp.getUi();
