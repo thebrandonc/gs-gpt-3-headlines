@@ -56,8 +56,6 @@ class SheetManager {
 
   insertNewResults({ id, choices }) {
     try {
-      console.log('ID: ', id);
-      console.log('CHOICES: ', choices);
       const tab = this.sheetTabs.results;
       const firstRow = tab.getRange(TABLES.RESULTS).getLastRow() + 1;
       const results = choices.map(choice => (

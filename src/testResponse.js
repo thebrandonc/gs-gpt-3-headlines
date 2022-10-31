@@ -1,4 +1,4 @@
-const responseObj = { 
+const testResponse = { 
   id: 'cmpl-65igIcJKYRKkJnvY1BCpJU2f3b9aq',
   object: 'text_completion',
   created: 1666821414,

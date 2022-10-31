@@ -4,6 +4,7 @@ class App {
     this.val = new InputValidator();
     this.req = new RequestManager();
     this.btn = new BtnManager(this.sheet.sheetTabs.results);
+    this.msg = new Notification();
   };
 
   run() {
@@ -15,12 +16,12 @@ class App {
       this.sheet.insertNewResults(this.req.results);
       this.sheet.addResponseToHistory(this.req.results);
       this.sheet.incrementTokensUsed(this.req.results);
-      // this.sheet.clearUserInput();
+      this.sheet.clearUserInput();
       this.btn.normalState();
-      new Notification().send('success', 'Your AI generated results are ready');
+      this.msg.send('success', 'Your AI generated results are ready 😁');
     } catch (err) {
       this.btn.normalState();
-      new Notification().send('error', err);
+      this.msg.send('error', err);
     };
   };
 };

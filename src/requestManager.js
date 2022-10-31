@@ -7,10 +7,12 @@ class RequestManager {
 
   sendRequest() {
     try {
-      // const response = UrlFetchApp.fetch(API.ENDPOINT, this.params).getContentText();
-      // this.results = this.removeLineBreaks(JSON.parse(response));
-      this.results = this.removeLineBreaks(responseObj);
-      console.log('RESULTS: ', this.results);
+      if (!DEBUG) {
+        const response = UrlFetchApp.fetch(API.ENDPOINT, this.params).getContentText();
+        this.results = this.removeLineBreaks(JSON.parse(response));
+      } else {
+        this.results = this.removeLineBreaks(testResponse);
+      };
     } catch (err) {
       throw new Error(`Error getting results from OpenAI. ${err}`);
     };
