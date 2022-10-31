@@ -1,29 +1,29 @@
-// add params as instance variable, remove from arguments
-
 class RequestManager {
   getSuggestions(inputs) {
-    Logger.log(this.getParams(inputs).payload);
+    this.inputs = inputs;
+    this.getParams();
+    // this.sendRequest();
   };
 
-  sendRequest(params) {
-    const response = UrlFetchApp.fetch(API.ENDPOINT, params).getContentText();
+  sendRequest() {
+    const response = UrlFetchApp.fetch(API.ENDPOINT, this.params).getContentText();
     this.results = this.removeLineBreaks(JSON.parse(response));
   };
 
-  getParams(inputs) {
-    return {
+  getParams() {
+    this.params = {
       contentType: 'application/json',
       headers: { 'Authorization': `Bearer ${API.KEY}` },
       method: 'post',
       payload: JSON.stringify({
         model: API.MODEL,
-        prompt: inputs.textPrompt.getValue(),
-        max_tokens: this.calculateTokens(inputs.wordCount.getValue()),
-        temperature: this.getTemeperature(inputs.creativityLevel.getValue()),
-        n: inputs.numResults.getValue(),
+        prompt: this.inputs.textPrompt.getValue(),
+        max_tokens: this.calculateTokens(this.inputs.wordCount.getValue()),
+        temperature: this.getTemeperature(this.inputs.creativityLevel.getValue()),
+        n: this.inputs.numResults.getValue(),
         presence_penalty: API.PRESENCE_PENALTY,
         frequency_penalty: API.FREQUENCY_PENALTY,
-        best_of: inputs.numResults.getValue() + 1
+        best_of: this.inputs.numResults.getValue() + 1
       })
     };
   };
@@ -33,13 +33,7 @@ class RequestManager {
   };
 
   getTemeperature(creativity) {
-    const temp = {
-      'High': 0.9,
-      'Medium': 0.5,
-      'Low': 0.1,
-      'Direct Answer': 0
-    };
-    return temp[creativity];
+    return CREATIVITY[creativity.toUpperCase()];
   };
 
   removeLineBreaks(response) {

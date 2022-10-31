@@ -38,8 +38,7 @@ class SheetManager {
         prevResults.getRange(header+1, 1, height, 8).setValue('');
       };
     } catch(err) {
-      const msg = `Could not clear results. ${err}`;
-      throw new Error(msg);
+      throw new Error(`Could not clear results. ${err}`);
     };
   };
 
@@ -66,13 +65,11 @@ class SheetManager {
       usage.completion_tokens,
       usage.total_tokens
     );
-    
     tab.getRange(row, 1, 1, 8).setValues([newRow]);
   };
 
   incrementTokensUsed({ usage }) {
     const tokens = this.doc.getRange(TOKENS_USED);
-    const newValue = tokens.getValue() + usage.total_tokens;
-    tokens.setValue(newValue);
+    tokens.setValue(tokens.getValue() + usage.total_tokens);
   };
 };

@@ -7,18 +7,24 @@ class App {
   };
 
   run() {
-    // loading state button
-    // get sheet inputs
-    // validate inputs
-    // send request
-    // insert results into sheet
-    // insert res into history
-    // increment tokens used
-    // clear inputs
-    // normal state button
-    this.btn.loadingState();
-    this.req.getSuggestions(this.sheet.userInput);
-    this.btn.normalState();
+    try {
+      // loading state button
+      // get sheet inputs
+      // validate inputs
+      // send request
+      // insert results into sheet
+      // insert res into history
+      // increment tokens used
+      // clear inputs
+      // normal state button
+      this.btn.loadingState();
+      this.validator.validate(this.sheet.userInput);
+      console.log(this.validator.tokens);
+      this.btn.normalState();
+    } catch(err) {
+      this.btn.normalState();
+      console.error(err);
+    }
   };
 };
 
