@@ -39,7 +39,7 @@ class InputValidator {
     const creativityLevel = this.inputs.creativityLevel.getValue();
     const validValues = Object.keys(CREATIVITY);
 
-    if (!validValues.includes(creativityLevel.toUpperCase())) {
+    if (!validValues.includes(creativityLevel.toUpperCase().replace(' ', '_'))) {
       throw new Error('Invalid creativity level.');
     };
   };

@@ -1,10 +1,12 @@
+// rename this file settings.js and insert a valid api key
+
 const API = {
   KEY: 'INSERT_API_KEY_HERE',
   ENDPOINT: 'https://api.openai.com/v1/completions',
   MODEL: 'text-davinci-002',
-  PRESENCE_PENALTY: 0.9,
-  FREQUENCY_PENALTY: 0.9,
-  MAX_TOKENS: 100
+  PRESENCE_PENALTY: 2,
+  FREQUENCY_PENALTY: 2,
+  MAX_TOKENS: 2048
 };
 
 const TABS = {

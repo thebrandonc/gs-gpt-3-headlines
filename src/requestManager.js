@@ -50,7 +50,7 @@ class RequestManager {
 
   getTemeperature(creativity) {
     try {
-      return CREATIVITY[creativity.toUpperCase()];
+      return CREATIVITY[creativity.toUpperCase().replace(' ', '_')];
     } catch (err) {
       throw new Error(`Error getting creativity measure. ${err}`);
     };
